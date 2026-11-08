@@ -2644,14 +2644,14 @@ body .student-profile-custom-field-box label{
 #contractFontFamily option[value="Montserrat"]{font-family:Montserrat,sans-serif}
 
 /* Standalone Teaching Website: dashboard contains four main sections. */
-.teaching-dashboard-menu{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;max-width:900px;margin:44px auto 0;padding:0 18px;}
-.teaching-dashboard-menu .dashboard-menu-btn{min-height:170px;display:flex;align-items:center;justify-content:center;text-align:center;border:1px solid #d7dee8;border-radius:18px;background:#f7fafc;color:#182230;box-shadow:0 8px 24px rgba(15,23,42,.08);}
+.teaching-dashboard-menu{grid-template-columns:repeat(2,minmax(0,1fr));gap:26px;max-width:1160px;margin:52px auto 0;padding:0 22px;}
+.teaching-dashboard-menu .dashboard-menu-btn{min-height:220px;display:flex;align-items:center;justify-content:center;text-align:center;border:1px solid #d7dee8;border-radius:18px;background:#f7fafc;color:#182230;box-shadow:0 8px 24px rgba(15,23,42,.08);}
 .teaching-dashboard-menu .dashboard-menu-btn:hover{background:#edf4fb;transform:translateY(-3px);}
-.teaching-dashboard-menu .dashboard-menu-label{font-size:clamp(18px,2vw,23px);letter-spacing:.04em;margin:0;}
+.teaching-dashboard-menu .dashboard-menu-label{font-size:clamp(22px,2.3vw,29px);letter-spacing:.04em;margin:0;}
 #dashboardPage .dashboard-overview,#dashboardPage .dashboard-summary-grid,#dashboardPage .dashboard-summary,#dashboardPage .dashboard-todo,#dashboardPage .dashboard-grid,#dashboardPage .inspirational-quotes-card{display:none!important;}
 #dashboardPage{min-height:calc(100vh - 60px);}
 #dashboardPage h2,#dashboardPage .dashboard-heading{ text-align:center; }
-@media(max-width:760px){.teaching-dashboard-menu{grid-template-columns:1fr;max-width:520px;margin-top:24px;gap:14px}.teaching-dashboard-menu .dashboard-menu-btn{min-height:100px}}
+@media(max-width:760px){.teaching-dashboard-menu{grid-template-columns:1fr;max-width:620px;margin-top:26px;gap:16px}.teaching-dashboard-menu .dashboard-menu-btn{min-height:145px}}
 
 </style>
 
@@ -4291,6 +4291,17 @@ body.portal-dark .quote-author{color:#c5d2d6!important}
 #authScreen,.auth-screen,.auth-card,.profile-panel,.profile-trigger,.profile-password-btn,.profile-menu-wrap,.logout-btn,.profile-logout-option{display:none!important;visibility:hidden!important;}
 .teacher-no-login-label{display:block!important;}
 </style>
+<style id="teaching-dashboard-final-fix-v2">
+/* Keep the simple teacher label, but remove notification / refresh / settings controls. */
+.userbar{display:flex!important;justify-content:flex-start!important;align-items:center!important;min-height:48px!important;}
+.userbar button,.userbar [role="button"],#notificationBellBtn,#notificationBellBadge,#settingsGearBtn,#refreshBtn,#refreshPageBtn,.notification-bell-btn,.settings-gear-btn,.refresh-btn,.portal-notification-wrap{display:none!important;visibility:hidden!important;}
+/* Large, clearly clickable dashboard cards in the requested order. */
+#dashboardPage .teaching-dashboard-menu{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:24px!important;width:min(1180px,96%)!important;max-width:1180px!important;margin:42px auto 0!important;padding:0 12px!important;}
+#dashboardPage .teaching-dashboard-menu .dashboard-menu-btn{display:flex!important;align-items:center!important;justify-content:center!important;width:100%!important;min-height:230px!important;padding:28px!important;border-radius:20px!important;text-align:center!important;font-size:clamp(24px,2.5vw,32px)!important;font-weight:900!important;cursor:pointer!important;pointer-events:auto!important;position:relative!important;z-index:2!important;}
+#dashboardPage .teaching-dashboard-menu .dashboard-menu-label{display:block!important;margin:0!important;font-size:clamp(24px,2.5vw,32px)!important;line-height:1.2!important;font-weight:900!important;pointer-events:none!important;}
+#dashboardPage .teaching-dashboard-menu .dashboard-menu-btn:hover{transform:translateY(-3px)!important;filter:brightness(.97)!important;}
+@media(max-width:760px){#dashboardPage .teaching-dashboard-menu{grid-template-columns:1fr!important;width:100%!important;margin-top:24px!important;gap:16px!important;}#dashboardPage .teaching-dashboard-menu .dashboard-menu-btn{min-height:150px!important;}}
+</style>
 </head>
 
 <body>
@@ -4320,91 +4331,11 @@ TD
 
 <div class="userbar">
 <div class="teacher-no-login-label" style="font-weight:800;padding:8px 12px;">Teacher Danyeal</div>
-
-<div class="portal-notification-wrap">
-  <button type="button" id="notificationBellBtn" class="notification-bell-btn" onclick="togglePortalNotifications(event)" aria-label="Open notifications" title="Notifications">
-    <span class="notification-bell-icon">🔔</span>
-    <span id="notificationBellBadge" class="notification-bell-badge" aria-hidden="true">0</span>
-  </button>
-  <div id="portalNotificationPanel" class="portal-notification-panel" aria-hidden="true">
-    <div class="portal-notification-header">
-      <div><strong>Notifications</strong><small id="notificationUnreadText">No new notifications</small></div>
-      <button type="button" onclick="markAllPortalNotificationsRead(event)" title="Mark all as read">✓</button>
-    </div>
-    <div id="portalNotificationList" class="portal-notification-list"></div>
-  </div>
-</div>
-
-<button type="button" id="portalReloadBtn" class="portal-reload-btn" onclick="reloadPortalData(event)" aria-label="Reload portal" title="Reload Portal">↻</button>
-
-<button type="button" id="settingsGearBtn" class="settings-gear-btn" onclick="togglePortalSettings(event)" aria-label="Open Settings" title="Settings">⚙️</button>
-
-</div>
+</div><!-- end userbar -->
 
 
-<div id="portalSettingsPanel" class="portal-settings-panel" aria-hidden="true">
-  <div class="portal-settings-header">
-    <div><h3>Settings</h3><span>Customize your Teacher Danyeal's Teaching Website</span></div>
-    <button type="button" class="portal-settings-close" onclick="closePortalSettings()" aria-label="Close Settings">×</button>
-  </div>
 
-  <div class="settings-section">
-    <div class="settings-section-title">COLOR PALETTE</div>
-    <div class="palette-grid" id="paletteGrid"></div>
-    <div class="custom-color-row">
-      <div><strong>Color Wheel</strong><small>Choose any overall accent color</small></div>
-      <input id="customAccentColor" type="color" value="#00e5e5" aria-label="Choose custom accent color" onchange="applyCustomAccent(this.value)">
-    </div>
-  </div>
 
-  <div class="settings-section">
-    <div class="settings-section-title">APPEARANCE</div>
-    <div class="mode-grid">
-      <button type="button" id="lightModeBtn" class="mode-btn" onclick="setPortalTheme('light')">☀️ <span>Light Mode</span></button>
-      <button type="button" id="darkModeBtn" class="mode-btn" onclick="setPortalTheme('dark')">🌙 <span>Night / Dark Mode</span></button>
-    </div>
-  </div>
-
-  <div class="settings-section">
-    <div class="settings-section-title">FONT</div>
-    <select id="portalFontSelect" class="settings-select" onchange="applyPortalFont(this.value)" aria-label="Choose website font"></select>
-    <div class="font-choice-note"><strong>Double click to apply.</strong> Choose from 64 font styles. Each option shows its actual preview.</div>
-    <div id="fontGallery" class="font-gallery" aria-label="Font style previews"></div>
-    <div id="fontPreview" class="font-preview">Teacher Danyeal's Teaching Website — Font Preview</div>
-  </div>
-
-  <div class="settings-section">
-    <div class="settings-section-title">NETWORK TEST</div>
-    <button type="button" class="settings-action-btn" onclick="openNetworkTest()">📶 Run Full-Screen Network Test</button>
-  </div>
-
-  <div class="settings-section">
-    <div class="settings-section-title">NOTIFICATIONS</div>
-    <div class="notification-row">
-      <div><strong>Class Reminder</strong><small>Alert when a class starts within 10 minutes</small></div>
-      <label class="switch"><input id="portalNotificationToggle" type="checkbox" onchange="setPortalNotifications(this.checked)"><span></span></label>
-    </div>
-    <div class="notification-sound-row">
-      <label for="portalNotificationSound">Notification Sound</label>
-      <select id="portalNotificationSound" class="settings-select" onchange="setNotificationSound(this.value)">
-        <option value="chime">🔔 Chime</option>
-        <option value="bell">🔔 Bell</option>
-        <option value="double">🔔 Double Bell</option>
-        <option value="soft">🔔 Soft Tone</option>
-        <option value="marimba">🎵 Marimba</option>
-        <option value="piano">🎹 Piano</option>
-        <option value="digital">📟 Digital</option>
-        <option value="pulse">💓 Pulse</option>
-        <option value="alarm">🚨 Alert Alarm</option>
-        <option value="gentle">🌸 Gentle Reminder</option>
-        <option value="sparkle">✨ Sparkle</option>
-        <option value="arcade">🕹️ Arcade</option>
-      </select>
-      <small class="notification-sound-note">Each class alert sound plays for 10 seconds.</small>
-      <button type="button" class="sound-test-btn" onclick="testNotificationSound()">Test 10-Second Sound</button>
-    </div>
-  </div>
-</div>
 
 <div id="networkTestOverlay" class="network-test-overlay" aria-hidden="true">
   <div class="network-test-card">
@@ -4496,6 +4427,9 @@ Dashboard
 </div>
 
 <div class="dashboard-menu teaching-dashboard-menu">
+<button type="button" class="dashboard-menu-btn" onclick="showPage('student')">
+<span class="dashboard-menu-label">STUDENT</span>
+</button>
 <button type="button" class="dashboard-menu-btn" onclick="showPage('evaluation')">
 <span class="dashboard-menu-label">EVALUATION</span>
 </button>
@@ -4504,9 +4438,6 @@ Dashboard
 </button>
 <button type="button" class="dashboard-menu-btn" onclick="showPage('payment')">
 <span class="dashboard-menu-label">PAYMENT RECEIPT</span>
-</button>
-<button type="button" class="dashboard-menu-btn" onclick="showPage('student')">
-<span class="dashboard-menu-label">STUDENT</span>
 </button>
 </div>
 
@@ -8384,9 +8315,9 @@ document.querySelectorAll('.page')
 p=>p.classList.remove('active')
 );
 
-document.getElementById(
-page+'Page'
-).classList.add('active');
+const targetPage=document.getElementById(page+'Page');
+if(!targetPage){console.warn('Page not found:',page);return;}
+targetPage.classList.add('active');
 
 document.querySelectorAll('.nav button')
 .forEach(
