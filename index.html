@@ -16248,7 +16248,7 @@ function portalNotificationAdd(title,body,type='general',key='',options={}){
  renderPortalNotifications();
  const bell=document.getElementById('notificationBellBtn');if(bell){bell.classList.remove('has-new');void bell.offsetWidth;bell.classList.add('has-new');setTimeout(()=>bell.classList.remove('has-new'),1800);}
  if(options.sound!==false)playShortNotificationSound();
- if('Notification' in window&&Notification.permission==='granted'&&options.browser!==false){try{new Notification('Teacher Danyeal's Teaching Website',{body:String(body||title||''),tag:cleanKey||undefined});}catch(e){}}
+ if('Notification' in window&&Notification.permission==='granted'&&options.browser!==false){try{new Notification("Teacher Danyeal\'s Teaching Website",{body:String(body||title||''),tag:cleanKey||undefined});}catch(e){}}
  showPortalToast('🔔 '+String(title||'Notification')+(body?` — ${body}`:''));
  return true;
 }
