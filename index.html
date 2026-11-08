@@ -2643,8 +2643,8 @@ body .student-profile-custom-field-box label{
 #contractFontFamily option[value="Poppins"]{font-family:Poppins,sans-serif}
 #contractFontFamily option[value="Montserrat"]{font-family:Montserrat,sans-serif}
 
-/* Standalone Teaching Website: dashboard intentionally contains only three tools. */
-.teaching-dashboard-menu{grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;max-width:1120px;margin:44px auto 0;padding:0 18px;}
+/* Standalone Teaching Website: dashboard contains four main sections. */
+.teaching-dashboard-menu{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;max-width:900px;margin:44px auto 0;padding:0 18px;}
 .teaching-dashboard-menu .dashboard-menu-btn{min-height:170px;display:flex;align-items:center;justify-content:center;text-align:center;border:1px solid #d7dee8;border-radius:18px;background:#f7fafc;color:#182230;box-shadow:0 8px 24px rgba(15,23,42,.08);}
 .teaching-dashboard-menu .dashboard-menu-btn:hover{background:#edf4fb;transform:translateY(-3px);}
 .teaching-dashboard-menu .dashboard-menu-label{font-size:clamp(18px,2vw,23px);letter-spacing:.04em;margin:0;}
@@ -4287,351 +4287,21 @@ body.portal-dark .quote-author{color:#c5d2d6!important}
 #studentContractPreviewPages .contract-inline-image{visibility:visible!important;opacity:1!important;}
 </style>
 </style>
+<style id="teacher-no-login-final-overrides">
+#authScreen,.auth-screen,.auth-card,.profile-panel,.profile-trigger,.profile-password-btn,.profile-menu-wrap,.logout-btn,.profile-logout-option{display:none!important;visibility:hidden!important;}
+.teacher-no-login-label{display:block!important;}
+</style>
 </head>
 
 <body>
 
-<!-- =========================================================
-     AUTH SCREEN
-========================================================= -->
-
-<div id="authScreen" class="auth-screen">
-
-<div class="auth-card">
-
-<div class="auth-header">
-
-<div class="brand-logo">
-TD
-</div>
-
-<h1>
-TD-PH
-</h1>
-
-<p>
-Teacher Danyeal's Teaching Website
-</p>
-
-</div>
-
-<div class="auth-body">
-
-<div id="loginPanel">
-
-<h2>Login</h2>
-
-<label>Email</label>
-
-<input
-id="loginEmail"
-type="email"
-placeholder="teacher@email.com"
-autocomplete="email"
->
-
-<label>Password</label>
-
-<div class="password-wrap">
-
-<input
-id="loginPassword"
-type="password"
-placeholder="Password"
-autocomplete="current-password"
->
-
-<button
-type="button"
-class="password-toggle"
-onclick="togglePassword('loginPassword',this)"
-aria-label="Show password"
->👁</button>
-
-</div>
-
-<div class="forgot-password-wrap">
-
-<button
-type="button"
-class="forgot-password-btn"
-onclick="showAuthPanel('forgot')"
->
-Forgot Password?
-</button>
-
-</div>
-
-<button
-id="loginBtn"
-type="button"
-class="primary auth-btn"
->
-Login
-</button>
-
-<div class="auth-switch">
-
-Don't have an account?
-
-<button
-type="button"
-onclick="showAuthPanel('signup')"
->
-Create Account
-</button>
-
-</div>
-
-</div>
-
-
-<div id="signupPanel" class="hidden">
-
-<h2>Create Account</h2>
-
-<label>Teacher Name</label>
-
-<input
-id="signupName"
-placeholder="Your name"
-autocomplete="name"
->
-
-<label>Email</label>
-
-<input
-id="signupEmail"
-type="email"
-placeholder="teacher@email.com"
-autocomplete="email"
->
-
-<label>Password</label>
-
-<div class="password-wrap">
-
-<input
-id="signupPassword"
-type="password"
-placeholder="At least 6 characters"
-autocomplete="new-password"
->
-
-<button
-type="button"
-class="password-toggle"
-onclick="togglePassword('signupPassword',this)"
-aria-label="Show password"
->👁</button>
-
-</div>
-
-<label>Confirm Password</label>
-
-<div class="password-wrap">
-
-<input
-id="signupConfirm"
-type="password"
-placeholder="Re-enter password"
-autocomplete="new-password"
->
-
-<button
-type="button"
-class="password-toggle"
-onclick="togglePassword('signupConfirm',this)"
-aria-label="Show password"
->👁</button>
-
-</div>
-
-<button
-id="signupBtn"
-type="button"
-class="primary auth-btn"
->
-Create Account
-</button>
-
-<div class="auth-switch">
-
-Already have an account?
-
-<button
-type="button"
-onclick="showAuthPanel('login')"
->
-Login
-</button>
-
-</div>
-
-</div>
-
-
-<div id="verifyPanel" class="hidden">
-
-<h2>Verify Your Email</h2>
-
-<p style="font-size:14px;line-height:1.5;margin-top:0">
-
-We sent a confirmation link to
-
-<b id="verifyEmailText">your email</b>.
-
-</p>
-
-<p style="font-size:14px;line-height:1.5;margin-top:12px">
-
-Please open the email and click
-<b>Confirm email address</b>
-to verify your account.
-
-</p>
-
-<p style="font-size:13px;line-height:1.5;margin-top:12px">
-
-After confirming your email, return to this website and log in using your email and password.
-
-</p>
-
-<button
-id="resendBtn"
-type="button"
-class="secondary auth-btn"
->
-Resend Confirmation Email
-</button>
-
-<div class="auth-switch">
-
-<button
-type="button"
-onclick="showAuthPanel('login')"
->
-Back to Login
-</button>
-
-</div>
-
-</div>
-
-
-<div id="forgotPanel" class="hidden">
-
-<h2>Forgot Password?</h2>
-
-<p style="font-size:14px;line-height:1.5;margin-top:0">
-
-Enter your account email and we will send you a password reset link.
-
-</p>
-
-<label>Email</label>
-
-<input
-id="forgotEmail"
-type="email"
-placeholder="teacher@email.com"
-autocomplete="email"
->
-
-<button
-id="forgotBtn"
-type="button"
-class="primary auth-btn"
->
-Send Reset Link
-</button>
-
-<div class="auth-switch">
-
-<button
-type="button"
-onclick="showAuthPanel('login')"
->
-Back to Login
-</button>
-
-</div>
-
-</div>
-
-
-<div id="resetPanel" class="hidden">
-
-<h2>Set New Password</h2>
-
-<p style="font-size:14px;line-height:1.5;margin-top:0">
-
-Enter your new password below.
-
-</p>
-
-<label>New Password</label>
-
-<div class="password-wrap">
-
-<input
-id="resetPassword"
-type="password"
-placeholder="At least 6 characters"
-autocomplete="new-password"
->
-
-<button
-type="button"
-class="password-toggle"
-onclick="togglePassword('resetPassword',this)"
-aria-label="Show password"
->👁</button>
-
-</div>
-
-<label>Confirm New Password</label>
-
-<div class="password-wrap">
-
-<input
-id="resetConfirm"
-type="password"
-placeholder="Re-enter password"
-autocomplete="new-password"
->
-
-<button
-type="button"
-class="password-toggle"
-onclick="togglePassword('resetConfirm',this)"
-aria-label="Show password"
->👁</button>
-
-</div>
-
-<button
-id="resetBtn"
-type="button"
-class="primary auth-btn"
->
-Update Password
-</button>
-
-</div>
-
-<div id="authMessage" class="auth-message"></div>
-
-</div>
-</div>
-</div>
-
+<!-- Login and registration have been removed. This website opens directly. -->
 
 <!-- =========================================================
      MAIN APPLICATION
 ========================================================= -->
 
-<div id="appShell" class="hidden">
+<div id="appShell">
 
 <div class="app">
 
@@ -4649,41 +4319,7 @@ TD
 
 
 <div class="userbar">
-
-<div style="position:relative">
-
-<button
-type="button"
-class="profile-trigger"
-onclick="toggleProfilePanel(event)"
-aria-label="Open teacher profile"
->
-
-<div
-id="profileIcon"
-class="profile-icon"
->
-👤
-</div>
-
-<div class="profile-name-wrap">
-
-<span class="profile-label">
-Teacher Account
-</span>
-
-<span
-id="currentTeacher"
-class="profile-name"
->
-Teacher
-</span>
-
-</div>
-
-</button>
-
-</div>
+<div class="teacher-no-login-label" style="font-weight:800;padding:8px 12px;">Teacher Danyeal</div>
 
 <div class="portal-notification-wrap">
   <button type="button" id="notificationBellBtn" class="notification-bell-btn" onclick="togglePortalNotifications(event)" aria-label="Open notifications" title="Notifications">
@@ -4868,6 +4504,9 @@ Dashboard
 </button>
 <button type="button" class="dashboard-menu-btn" onclick="showPage('payment')">
 <span class="dashboard-menu-label">PAYMENT RECEIPT</span>
+</button>
+<button type="button" class="dashboard-menu-btn" onclick="showPage('student')">
+<span class="dashboard-menu-label">STUDENT</span>
 </button>
 </div>
 
@@ -5947,213 +5586,6 @@ No students or evaluations recorded yet.
 
 </div>
 </div>
-</div>
-
-
-<!-- =========================================================
-     TEACHER PROFILE
-========================================================= -->
-
-<div
-id="profilePanel"
-class="profile-panel"
-onclick="event.stopPropagation()"
->
-
-<div class="profile-panel-header">
-
-<div class="profile-picture-wrap">
-
-<div
-id="profilePictureLarge"
-class="profile-picture-large"
->
-👤
-</div>
-
-<button
-type="button"
-class="profile-picture-btn"
-onclick="openProfilePicturePicker(event)"
->
-Change Picture
-</button>
-
-<input
-id="profilePictureInput"
-type="file"
-accept="image/*"
-style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;"
-onchange="handleProfilePicture(event)"
->
-
-</div>
-
-<div class="profile-header-name">
-
-<b id="profileHeaderName">
-Teacher
-</b>
-
-<span id="profileHeaderEmail">
-—
-</span>
-
-</div>
-
-</div>
-
-<div class="profile-fields">
-
-<div class="profile-field">
-
-<label>Username</label>
-
-<input
-id="profileUsername"
-placeholder="Username"
->
-
-</div>
-
-<div class="profile-field">
-
-<label>Teacher Full Name</label>
-
-<input
-id="profileFullName"
-placeholder="Teacher Full Name"
->
-
-</div>
-
-<div class="profile-field">
-
-<label>Gmail Account</label>
-
-<div class="profile-gmail-row">
-
-<input
-id="profileEmail"
-type="email"
-readonly
-class="profile-editable-readonly"
->
-
-</div>
-
-<div class="small"></div>
-
-</div>
-
-<div class="profile-field">
-
-<label>Phone Number</label>
-
-<input
-id="profilePhone"
-type="tel"
-placeholder="Phone Number"
->
-
-</div>
-
-<div class="profile-field">
-
-<label>Gender</label>
-
-<select id="profileGender">
-
-<option value="">
-Select Gender
-</option>
-
-<option value="Male">
-Male
-</option>
-
-<option value="Female">
-Female
-</option>
-
-<option value="Prefer not to say">
-Prefer not to say
-</option>
-
-</select>
-
-</div>
-
-</div>
-
-<div
-id="profileStatus"
-class="profile-status"
-></div>
-
-<div class="profile-actions">
-
-<button
-type="button"
-id="profileEditSaveBtn"
-class="profile-save-btn"
-onclick="toggleTeacherProfileEdit()"
->
-Edit Profile
-</button>
-
-</div>
-
-<button
-type="button"
-class="profile-password-btn"
-onclick="openChangePasswordModal()"
->
-Change Password
-</button>
-
-<div class="profile-menu-wrap">
-
-<button
-type="button"
-class="profile-menu-trigger"
-onclick="toggleProfileMoreMenu(event)"
->
-⋮ &nbsp; More Options
-</button>
-
-<div
-id="profileMoreMenu"
-class="profile-more-menu"
->
-
-<button
-type="button"
-onclick="openClearAllRecordsFromProfile()"
->
-Clear All Records
-</button>
-
-<button
-type="button"
-class="profile-delete-account-option"
-onclick="openDeleteAccountModal()"
->
-Delete Account
-</button>
-
-<button
-type="button"
-class="profile-logout-option"
-onclick="logoutTeacher()"
->
-Log Out
-</button>
-
-</div>
-
-</div>
-
 </div>
 
 
@@ -8320,26 +7752,7 @@ true
 }
 
 
-/* =========================================================
-   LOGOUT
-========================================================= */
-
-async function logoutTeacher(){
-
-closeProfilePanel();
-
-closeClearAllRecords();
-
-closeDeleteAccountModal();
-
-closeStudentClassRecord();
-
-closeEvaluationView();
-
-await supabaseClient.auth.signOut();
-
-}
-
+/* No login/logout controls or account session are used in this standalone website. */
 
 /* =========================================================
    SIGNED IN
@@ -8434,149 +7847,29 @@ showAuthPanel('login');
 ========================================================= */
 
 async function initAuth(){
-
-const recovery=
-await checkPasswordRecovery();
-
-if(recovery){
-
-return;
-
-}
-
-const {
-  data:{session}
-} = await supabaseClient.auth.getSession();
-
-if(session){
-  await handleSignedIn(session.user);
-  return;
-}
-
-handleSignedOut();
-
-supabaseClient.auth.onAuthStateChange(
-(event,session)=>{
-
-if(event==='PASSWORD_RECOVERY'){
-
-document.getElementById(
-'appShell'
-).classList.add('hidden');
-
-document.getElementById(
-'authScreen'
-).classList.remove('hidden');
-
-showAuthPanel('reset');
-
-return;
-
-}
-
-if(session){
-
-handleSignedIn(session.user);
-
-}else{
-
-handleSignedOut();
-
-}
-
-}
-);
-
+  // No-login mode: open the teaching dashboard directly and use local device storage.
+  currentUser=null;
+  const authScreen=document.getElementById('authScreen');
+  if(authScreen)authScreen.remove();
+  const appShell=document.getElementById('appShell');
+  if(appShell)appShell.classList.remove('hidden');
+  document.body.classList.add('teacher-no-login-mode');
+  const teacher=document.getElementById('currentTeacher');
+  if(teacher)teacher.textContent='Teacher Danyeal';
+  const dashboardName=document.getElementById('dashboardTeacherName');
+  if(dashboardName)dashboardName.textContent='TEACHER DANYEAL';
+  try{
+    loadTeacherProfile();
+    renderDashboard();
+    populateStudentSelect();
+    renderRecords();
+  }catch(error){
+    console.warn('Guest dashboard initialization:',error);
+  }
 }
 
 
-/* =========================================================
-   AUTH EVENT LISTENERS
-========================================================= */
-
-document.getElementById(
-'loginBtn'
-).addEventListener(
-'click',
-loginTeacher
-);
-
-document.getElementById(
-'signupBtn'
-).addEventListener(
-'click',
-createTeacherAccount
-);
-
-document.getElementById(
-'resendBtn'
-).addEventListener(
-'click',
-resendVerificationEmail
-);
-
-document.getElementById(
-'forgotBtn'
-).addEventListener(
-'click',
-sendPasswordReset
-);
-
-document.getElementById(
-'resetBtn'
-).addEventListener(
-'click',
-updatePassword
-);
-
-document.getElementById(
-'loginPassword'
-).addEventListener(
-'keydown',
-e=>{
-
-if(e.key==='Enter')
-loginTeacher();
-
-}
-);
-
-document.getElementById(
-'signupConfirm'
-).addEventListener(
-'keydown',
-e=>{
-
-if(e.key==='Enter')
-createTeacherAccount();
-
-}
-);
-
-document.getElementById(
-'forgotEmail'
-).addEventListener(
-'keydown',
-e=>{
-
-if(e.key==='Enter')
-sendPasswordReset();
-
-}
-);
-
-document.getElementById(
-'resetConfirm'
-).addEventListener(
-'keydown',
-e=>{
-
-if(e.key==='Enter')
-updatePassword();
-
-}
-);
-
+/* Login and account event listeners are intentionally disabled in no-login mode. */
 
 /* =========================================================
    PROFILE EVENT LISTENER
@@ -15087,7 +14380,7 @@ Class Record
 /* =========================================================
    PACKAGE-BASED CLASS RECORDS
 ========================================================= */
-const PACKAGE_CLASS_RECORD_COLUMNS_DEFAULT=['Class Number','Date','Day','Time','Attendance','Late','Homework Score'];
+const PACKAGE_CLASS_RECORD_COLUMNS_DEFAULT=['Class Number','Date','Day','Time','Attendance','Late','URL Lesson','Homework Score'];
 let currentPackageClassRecordContext=null;
 function packageClassRecordStorageKey(studentId,packageId){return `teacherDanyealPackageClassRecord_${currentUser?.id||'local'}_${studentId}_${packageId}`;}
 function getLocalPackageClassRecord(studentId,packageId){try{return JSON.parse(localStorage.getItem(packageClassRecordStorageKey(studentId,packageId))||'null')}catch(e){return null}}
@@ -15104,15 +14397,18 @@ function getPackageRecordCompleted(studentId,packageId){
     )
   ).length;
 }
-function buildPackageClassRecord(studentId,packageId,existing){const student=getStudents().find(s=>String(s.id)===String(studentId));const pkg=student?ensureStudentPackageState(student).find(p=>String(p.id)===String(packageId)):null;const rows=Array.isArray(existing?.classEntries)?existing.classEntries:packageRecordEntriesFromAppointments(studentId,packageId);return {id:existing?.id||'',studentId,packageId,packageNumber:existing?.packageNumber||((student?ensureStudentPackageState(student):[]).findIndex(p=>String(p.id)===String(packageId))+1||1),packageName:pkg?.packageName||existing?.packageName||'',totalClasses:Number(pkg?.classCount||existing?.totalClasses||0),status:getPackageRecordCompleted(studentId,packageId)>=Number(pkg?.classCount||existing?.totalClasses||0)&&Number(pkg?.classCount||existing?.totalClasses||0)>0?'COMPLETED':'ACTIVE',studentInfo:existing?.studentInfo||{name:student?.name||'',nickname:student?.nickname||'',studentId:student?.id||'',country:student?.country||'',level:student?.level||'',birthday:student?.birthday||'',duration:student?.duration||''},preferredSchedule:existing?.preferredSchedule||student?.preferredSchedule||[],columns:Array.isArray(existing?.columns)&&existing.columns.length?existing.columns:PACKAGE_CLASS_RECORD_COLUMNS_DEFAULT.slice(),classEntries:rows};}
+function buildPackageClassRecord(studentId,packageId,existing){const student=getStudents().find(s=>String(s.id)===String(studentId));const pkg=student?ensureStudentPackageState(student).find(p=>String(p.id)===String(packageId)):null;const rows=Array.isArray(existing?.classEntries)?existing.classEntries:packageRecordEntriesFromAppointments(studentId,packageId);return {id:existing?.id||'',studentId,packageId,packageNumber:existing?.packageNumber||((student?ensureStudentPackageState(student):[]).findIndex(p=>String(p.id)===String(packageId))+1||1),packageName:pkg?.packageName||existing?.packageName||'',totalClasses:Number(pkg?.classCount||existing?.totalClasses||0),status:getPackageRecordCompleted(studentId,packageId)>=Number(pkg?.classCount||existing?.totalClasses||0)&&Number(pkg?.classCount||existing?.totalClasses||0)>0?'COMPLETED':'ACTIVE',studentInfo:existing?.studentInfo||{name:student?.name||'',nickname:student?.nickname||'',studentId:student?.id||'',country:student?.country||'',level:student?.level||'',birthday:student?.birthday||'',duration:student?.duration||''},preferredSchedule:existing?.preferredSchedule||student?.preferredSchedule||[],columns:(()=>{const saved=Array.isArray(existing?.columns)&&existing.columns.length?existing.columns.slice():PACKAGE_CLASS_RECORD_COLUMNS_DEFAULT.slice();if(!saved.includes('URL Lesson'))saved.push('URL Lesson');return saved;})(),classEntries:rows};}
 async function loadPackageClassRecord(studentId,packageId){let local=getLocalPackageClassRecord(studentId,packageId);if(local)return buildPackageClassRecord(studentId,packageId,local);if(currentUser&&supabaseClient){try{const {data,error}=await supabaseClient.from('class_records').select('*').eq('user_id',currentUser.id).eq('student_id',String(studentId)).eq('package_id',String(packageId)).maybeSingle();if(error)throw error;if(data){const ce=data.class_entries;const parsed=Array.isArray(ce)?{rows:ce}:{columns:ce?.columns,rows:ce?.rows};return buildPackageClassRecord(studentId,packageId,{...data,columns:parsed.columns,classEntries:parsed.rows});}}catch(e){console.warn('Package class record load failed:',e)}}return buildPackageClassRecord(studentId,packageId,null);}
 async function savePackageClassRecord(record){saveLocalPackageClassRecord(record);if(currentUser&&supabaseClient){try{const payload={user_id:currentUser.id,student_id:String(record.studentId),package_id:String(record.packageId),package_number:Number(record.packageNumber||1),package_name:String(record.packageName||''),total_classes:Number(record.totalClasses||0),status:String(record.status||'ACTIVE'),student_info:record.studentInfo||{},preferred_schedule:record.preferredSchedule||[],class_entries:{columns:record.columns||[],rows:record.classEntries||[]}};const {data:existing,error:findError}=await supabaseClient.from('class_records').select('id').eq('user_id',currentUser.id).eq('student_id',String(record.studentId)).eq('package_id',String(record.packageId)).maybeSingle();if(findError)throw findError;if(existing?.id){const {error}=await supabaseClient.from('class_records').update(payload).eq('id',existing.id);if(error)throw error;}else{const {error}=await supabaseClient.from('class_records').insert([payload]);if(error)throw error;}}catch(e){console.warn('Package class record save failed:',e)}}}
-function packageRecordTableHtml(record){const cols=record.columns||PACKAGE_CLASS_RECORD_COLUMNS_DEFAULT;const rows=record.classEntries||[];return `<div class="package-record-editor"><table><thead><tr>${cols.map(c=>`<th>${escapeHtml(c)}</th>`).join('')}</tr></thead><tbody>${rows.length?rows.map((row,ri)=>`<tr>${cols.map(c=>`<td><input data-pcr-row="${ri}" data-pcr-col="${escapeAttr(c)}" value="${escapeAttr(row[c]??'')}"></td>`).join('')}</tr>`).join(''):`<tr><td colspan="${cols.length}" class="small" style="text-align:center;padding:18px">No class entries yet. Click ADD ROW to start.</td></tr>`}</tbody></table></div>`}
+let packageRecordAutoSaveTimer=null;
+function packageRecordTableHtml(record){const cols=record.columns||PACKAGE_CLASS_RECORD_COLUMNS_DEFAULT;const rows=record.classEntries||[];return `<div class="package-record-editor"><table><thead><tr>${cols.map(c=>`<th>${escapeHtml(c)}</th>`).join('')}</tr></thead><tbody>${rows.length?rows.map((row,ri)=>`<tr>${cols.map(c=>`<td><input data-pcr-row="${ri}" data-pcr-col="${escapeAttr(c)}" value="${escapeAttr(row[c]??'')}" oninput="schedulePackageRecordAutoSave()"></td>`).join('')}</tr>`).join(''):`<tr><td colspan="${cols.length}" class="small" style="text-align:center;padding:18px">No class entries yet. Click ADD ROW to start.</td></tr>`}</tbody></table></div>`}
 function readPackageRecordEditor(record){const cols=record.columns||PACKAGE_CLASS_RECORD_COLUMNS_DEFAULT;const rows=record.classEntries||[];document.querySelectorAll('[data-pcr-row]').forEach(el=>{const r=Number(el.dataset.pcrRow),c=el.dataset.pcrCol;if(rows[r])rows[r][c]=el.value});record.classEntries=rows;record.columns=cols;return record;}
-async function openPackageClassRecord(studentId,packageId){const record=await loadPackageClassRecord(studentId,packageId);currentPackageClassRecordContext=record;const student=getStudents().find(s=>String(s.id)===String(studentId));const completed=getPackageRecordCompleted(studentId,packageId);const total=Number(record.totalClasses||0);record.status=total>0&&completed>=total?'COMPLETED':'ACTIVE';const content=document.getElementById('studentClassRecordContent');if(!content)return;content.innerHTML=`<div class="record-student-header"><div class="record-student-header-info"><b>${escapeHtml(student?.nickname||student?.name||'Student')} — Class Record #${record.packageNumber}</b><span>${escapeHtml(record.packageName||`${total} Classes`)} · ${completed} / ${total} completed</span></div></div><div class="package-record-toolbar"><button type="button" class="primary" onclick="packageRecordAddRow()">ADD ROW</button><button type="button" onclick="packageRecordAddColumn()">ADD COLUMN</button><button type="button" class="primary" onclick="saveOpenPackageClassRecord()">SAVE CLASS RECORD</button></div>${record.status!=='COMPLETED'?`<div class="package-record-lock">Preview and Download PDF will become available after this package reaches ${total}/${total} completed classes.</div>`:''}${packageRecordTableHtml(record)}`;document.getElementById('studentClassRecordModal')?.classList.add('show');}
-function packageRecordAddRow(){if(!currentPackageClassRecordContext)return;const r={};(currentPackageClassRecordContext.columns||[]).forEach(c=>r[c]='');r['Class Number']=(currentPackageClassRecordContext.classEntries||[]).length+1;currentPackageClassRecordContext.classEntries.push(r);openPackageClassRecord(currentPackageClassRecordContext.studentId,currentPackageClassRecordContext.packageId);}
-function packageRecordAddColumn(){if(!currentPackageClassRecordContext)return;let name=prompt('Column name');if(!name)return;name=name.trim();if(!name)return;if((currentPackageClassRecordContext.columns||[]).some(c=>c.toLowerCase()===name.toLowerCase()))return;currentPackageClassRecordContext.columns.push(name);(currentPackageClassRecordContext.classEntries||[]).forEach(r=>r[name]='');openPackageClassRecord(currentPackageClassRecordContext.studentId,currentPackageClassRecordContext.packageId);}
-async function saveOpenPackageClassRecord(){if(!currentPackageClassRecordContext)return;readPackageRecordEditor(currentPackageClassRecordContext);const completed=getPackageRecordCompleted(currentPackageClassRecordContext.studentId,currentPackageClassRecordContext.packageId);currentPackageClassRecordContext.status=currentPackageClassRecordContext.totalClasses>0&&completed>=currentPackageClassRecordContext.totalClasses?'COMPLETED':'ACTIVE';await savePackageClassRecord(currentPackageClassRecordContext);openPackageClassRecord(currentPackageClassRecordContext.studentId,currentPackageClassRecordContext.packageId);openStudentProfile(currentPackageClassRecordContext.studentId);}
+function setPackageRecordSaveStatus(message){const el=document.getElementById('packageRecordAutoSaveStatus');if(el)el.textContent=message;}
+function schedulePackageRecordAutoSave(){if(!currentPackageClassRecordContext)return;readPackageRecordEditor(currentPackageClassRecordContext);setPackageRecordSaveStatus('Typing changes…');clearTimeout(packageRecordAutoSaveTimer);packageRecordAutoSaveTimer=setTimeout(async()=>{const record=currentPackageClassRecordContext;if(!record)return;readPackageRecordEditor(record);setPackageRecordSaveStatus('Saving…');await savePackageClassRecord(record);setPackageRecordSaveStatus('All changes saved automatically');},500);}
+async function openPackageClassRecord(studentId,packageId){const record=await loadPackageClassRecord(studentId,packageId);currentPackageClassRecordContext=record;const student=getStudents().find(s=>String(s.id)===String(studentId));const completed=getPackageRecordCompleted(studentId,packageId);const total=Number(record.totalClasses||0);record.status=total>0&&completed>=total?'COMPLETED':'ACTIVE';const content=document.getElementById('studentClassRecordContent');if(!content)return;content.innerHTML=`<div class="record-student-header"><div class="record-student-header-info"><b>${escapeHtml(student?.nickname||student?.name||'Student')} — Class Record #${record.packageNumber}</b><span>${escapeHtml(record.packageName||`${total} Classes`)} · ${completed} / ${total} completed</span></div></div><div class="package-record-toolbar"><button type="button" class="primary" onclick="packageRecordAddRow()">ADD ROW</button><button type="button" onclick="packageRecordAddColumn()">ADD COLUMN</button><span id="packageRecordAutoSaveStatus" class="small" aria-live="polite">Changes save automatically as you type</span></div>${record.status!=='COMPLETED'?`<div class="package-record-lock">Preview and Download PDF will become available after this package reaches ${total}/${total} completed classes.</div>`:''}${packageRecordTableHtml(record)}`;document.getElementById('studentClassRecordModal')?.classList.add('show');}
+function packageRecordAddRow(){if(!currentPackageClassRecordContext)return;readPackageRecordEditor(currentPackageClassRecordContext);const r={};(currentPackageClassRecordContext.columns||[]).forEach(c=>r[c]='');r['Class Number']=(currentPackageClassRecordContext.classEntries||[]).length+1;currentPackageClassRecordContext.classEntries.push(r);savePackageClassRecord(currentPackageClassRecordContext);openPackageClassRecord(currentPackageClassRecordContext.studentId,currentPackageClassRecordContext.packageId);}
+function packageRecordAddColumn(){if(!currentPackageClassRecordContext)return;readPackageRecordEditor(currentPackageClassRecordContext);let name=prompt('Column name');if(!name)return;name=name.trim();if(!name)return;if((currentPackageClassRecordContext.columns||[]).some(c=>c.toLowerCase()===name.toLowerCase()))return;currentPackageClassRecordContext.columns.push(name);(currentPackageClassRecordContext.classEntries||[]).forEach(r=>r[name]='');savePackageClassRecord(currentPackageClassRecordContext);openPackageClassRecord(currentPackageClassRecordContext.studentId,currentPackageClassRecordContext.packageId);}
+async function saveOpenPackageClassRecord(){if(!currentPackageClassRecordContext)return;readPackageRecordEditor(currentPackageClassRecordContext);const completed=getPackageRecordCompleted(currentPackageClassRecordContext.studentId,currentPackageClassRecordContext.packageId);currentPackageClassRecordContext.status=currentPackageClassRecordContext.totalClasses>0&&completed>=currentPackageClassRecordContext.totalClasses?'COMPLETED':'ACTIVE';await savePackageClassRecord(currentPackageClassRecordContext);setPackageRecordSaveStatus('All changes saved automatically');}
 function packageClassRecordPreviewHtml(record){return `<div class="package-record-preview-page"><h1>CLASS RECORD</h1><h2>${escapeHtml(record.packageName||'Package')} · Record #${record.packageNumber}</h2><div class="info-grid">${Object.entries(record.studentInfo||{}).filter(([k,v])=>v!==''&&v!=null).map(([k,v])=>`<div class="info-box"><small>${escapeHtml(k)}</small><b>${escapeHtml(String(v))}</b></div>`).join('')}</div><table><thead><tr>${(record.columns||[]).map(c=>`<th>${escapeHtml(c)}</th>`).join('')}</tr></thead><tbody>${(record.classEntries||[]).map(r=>`<tr>${(record.columns||[]).map(c=>`<td>${escapeHtml(r[c]??'')}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`}
 async function previewPackageClassRecord(studentId,packageId){const record=await loadPackageClassRecord(studentId,packageId);const completed=getPackageRecordCompleted(studentId,packageId);if(!(record.totalClasses>0&&completed>=record.totalClasses))return;const el=document.getElementById('packageClassRecordPreviewContent');if(el)el.innerHTML=packageClassRecordPreviewHtml(record);document.getElementById('packageClassRecordPreviewModal')?.classList.add('show');currentPackageClassRecordContext=record;}
 function closePackageClassRecordPreview(){document.getElementById('packageClassRecordPreviewModal')?.classList.remove('show');}
@@ -17193,7 +16489,7 @@ async function reloadPortalData(e){
   closePortalNotifications();
   try{
     if(!currentUser){
-      showPortalToast('Please sign in first.');
+      showPortalToast('This standalone website is running without login.');
       return;
     }
 
